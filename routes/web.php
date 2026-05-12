@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\TransaksiSerahTerimaController;
 use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function() {
     return view('landing');

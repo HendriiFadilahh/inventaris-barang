@@ -14,7 +14,6 @@
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
     <style>
 
         body{
@@ -57,11 +56,28 @@
             text-decoration: underline;
         }
 
+        .close-btn{
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:35px;
+            height:35px;
+            border-radius:50%;
+            background:black;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:18px;
+            font-weight:bold;
+        }
+
     </style>
 
 </head>
 
-<body class="bg-primary">
+<body>
 
     <div id="layoutAuthentication">
 
@@ -70,21 +86,12 @@
             <main>
 
                 <div class="container">
-<div class="close-btn" 
- style="
-    position:absolute;
-    top:10px;
-    left:10px;
-    width:30px;
-    height:30px;
-    border:none;
-    border-radius:50%;
-    background:black;
-    color:white;
-    cursor:pointer;"
-    
-> <a href="{{route('landing')}}"><-</a>
-</div>
+
+                    <!-- Tombol Back -->
+                    <a href="{{ route('landing') }}" class="close-btn">
+                        ←
+                    </a>
+
                     <div class="row justify-content-center">
 
                         <div class="col-lg-7">
@@ -99,7 +106,9 @@
 
                                 <div class="card-body">
 
-                                    <form action="proses_register.php" method="POST">
+                                    <!-- FORM -->
+                                    <form action="{{ route('login.register') }}" method="POST">
+                                        @csrf
 
                                         <!-- NAMA -->
                                         <div class="row mb-3">
@@ -234,7 +243,7 @@
 
                                     <div class="small">
 
-                                        <a href="{{route('login.login')}}">
+                                        <a href="{{ route('login.login') }}">
                                             Have an account? Go to login
                                         </a>
 
