@@ -8,18 +8,30 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function showLogin()
+    public function index()
     {
         return view('login.login');
     }
 
-    public function showRegister()
+    public function authenticate(Request $request)
     {
-        return view('login.register');
-    }
+        $credentials = $request->validate([
+             'email'    => ['required', 'email'],  
+             'password' => ['required']
+        ]);
 
-    public function dashboard()
-    {
-        return view('beranda');
-    }
-}
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $user = Auth::user();
+
+            switch ($user->role) {
+            case 'admin':
+                         return redirect()->route('admin.dashboard');
+                                                                                                                                           
+                default:
+                    # code...
+                    break;
+            }
+        }
+     }
+}                                                                           

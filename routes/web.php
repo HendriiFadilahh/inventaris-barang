@@ -17,10 +17,12 @@ Route::get('/', function() {
 
 
 Route::prefix('login')->group(function () {
-    Route::get('/login', [LoginController::class, 'showLogin'])->name('login.login');
-    Route::get('/register', [LoginController::class, 'showRegister'])->name('login.register');
+    Route::get('/login', [LoginController::class, 'index'])->name('login.login');
+    Route::get('/register', [RegisterController::class, 'index'])->name('login.register');
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
 });
+
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 
 // Route::get('/', function () {
@@ -31,9 +33,7 @@ Route::prefix('login')->group(function () {
 //     return view('login.register');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
 
 
 Route::resource('barang', BarangController::class);
@@ -45,3 +45,5 @@ Route::resource('barang-masuk', BarangMasukController::class);
 Route::resource('serah-terima', TransaksiSerahTerimaController::class);
 
 Route::resource('laporan-keuangan', LaporanKeuanganController::class);
+
+ Route::get('/Admin/index', function () { return view('Admin.index');});

@@ -107,7 +107,7 @@
                                 <div class="card-body">
 
                                     <!-- FORM -->
-                                    <form action="{{ route('login.register') }}" method="POST">
+                                    <form action="{{ route('register.store') }}" method="POST">
                                         @csrf
 
                                         <!-- NAMA -->
@@ -121,13 +121,13 @@
                                                         class="form-control"
                                                         id="inputFirstName"
                                                         type="text"
-                                                        name="first_name"
-                                                        placeholder="Enter your first name"
+                                                        name="name"
+                                                        placeholder="name"
                                                         required
                                                     />
 
                                                     <label for="inputFirstName">
-                                                        First Name
+                                                        Name
                                                     </label>
 
                                                 </div>
@@ -139,28 +139,6 @@
                                                 <div class="form-floating">
 
                                                     <input 
-                                                        class="form-control"
-                                                        id="inputLastName"
-                                                        type="text"
-                                                        name="last_name"
-                                                        placeholder="Enter your last name"
-                                                        required
-                                                    />
-
-                                                    <label for="inputLastName">
-                                                        Last Name
-                                                    </label>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <!-- EMAIL -->
-                                        <div class="form-floating mb-3">
-
-                                            <input 
                                                 class="form-control"
                                                 id="inputEmail"
                                                 type="email"
@@ -173,8 +151,13 @@
                                                 Email Address
                                             </label>
 
+                                                </div>
+
+                                            </div>
+
                                         </div>
 
+                                        <!-- EMAIL -->
                                         <!-- PASSWORD -->
                                         <div class="row mb-3">
 

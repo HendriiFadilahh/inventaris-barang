@@ -9,27 +9,27 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     // Menampilkan halaman register
-    public function showRegister()
+    public function index()
     {
         return view('login.register');
     }
 
     // Proses register user
-    public function register(Request $request)
+    public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required|min:6'
         ]);
 
         // Simpan data user
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Simpan user
+        $data = User::create($validatedData);
+
 
         // Redirect ke login
         return redirect('/login')
