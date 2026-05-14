@@ -11,7 +11,7 @@ class RegisterController extends Controller
     // Menampilkan halaman register
     public function index()
     {
-        return view('login.register');
+        return view('auth.register');
     }
 
     // Proses register user
@@ -28,7 +28,12 @@ class RegisterController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         // Simpan user
-        $data = User::create($validatedData);
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+            'role' => 'keuangan' // Set role default sebagai 'keuangan'
+        ]);
 
 
         // Redirect ke login

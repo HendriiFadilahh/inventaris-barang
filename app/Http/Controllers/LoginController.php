@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.login');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request)
@@ -24,14 +24,33 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            switch ($user->role) {
-            case 'admin':
-                         return redirect()->route('admin.dashboard');
-                                                                                                                                           
+            switch ($user->role){
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'atasan':
+                    return redirect()->route('atasan.dashboard');
+                case 'keuangan':
+                    return redirect()->route('keuangan.dashboard');
+                case 'karyawan':
+                    return redirect()->route('karyawan.dashboard');
                 default:
-                    # code...
-                    break;
+                    Auth::logout();
+                    return redirect('/login');
+                
             }
         }
-     }
-}                                                                           
+
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+} 

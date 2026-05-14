@@ -97,7 +97,7 @@
 
                                 <div class="card-body">
 
-                                    <form action="dashboard.index" method="POST">
+                                    <form action="{{ route('authenticate') }}" method="POST">
 
                                         <!-- EMAIL -->
                                         <div class="form-floating mb-3">
@@ -174,7 +174,7 @@
 
                                     <div class="small">
 
-                                        <a href="{{route('login.register')}}">
+                                        <a href="{{route('register')}}">
                                             Need an account? Sign up!
                                         </a>
                                     </div>

@@ -133,14 +133,14 @@
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-box"></i>
                             </div>
-                            Data Barang
+                            Persetujuan
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-down"></i>
                             </div>
-                            Transaksi
+                            Riwayat Persetujuan
                         </a>
 
                         <a class="nav-link" href="#">

@@ -226,7 +226,7 @@
 
                                     <div class="small">
 
-                                        <a href="{{ route('login.login') }}">
+                                        <a href="{{ route('login') }}">
                                             Have an account? Go to login
                                         </a>
 

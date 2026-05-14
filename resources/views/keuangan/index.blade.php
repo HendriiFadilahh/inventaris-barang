@@ -91,7 +91,14 @@
 
                     <li><hr class="dropdown-divider" /></li>
 
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
                 </ul>
 
             </li>
@@ -126,28 +133,28 @@
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-box"></i>
                             </div>
-                            Data Barang
+                            Transaksi
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-down"></i>
                             </div>
-                            Barang Masuk
+                            Pengeluaran
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
                             </div>
-                            Barang Keluar
+                            Laporan Keuangan
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-file"></i>
                             </div>
-                            Laporan
+                            Anggaran
                         </a>
 
                     </div>

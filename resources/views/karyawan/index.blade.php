@@ -133,21 +133,28 @@
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-box"></i>
                             </div>
-                            Data Barang
+                            Input Barang
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-down"></i>
                             </div>
-                            Transaksi
+                            Pengajuan Barang
                         </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
                             </div>
-                            Laporan
+                            Riwayat Pengajuan
+                        </a>
+
+                        <a class="nav-link" href="#">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-file"></i>
+                            </div>
+                            Stok Barang
                         </a>
 
                     </div>
