@@ -129,7 +129,7 @@
 
                         <div class="sb-sidenav-menu-heading">Menu</div>
 
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.dataBarang') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-box"></i>
                             </div>

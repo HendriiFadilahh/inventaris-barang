@@ -2,22 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\PengajuanBarangController;
-use App\Http\Controllers\BarangMasukController;
-use App\Http\Controllers\TransaksiSerahTerimaController;
-use App\Http\Controllers\LaporanKeuanganController;
+// use App\Http\Controllers\BarangController;
+// use App\Http\Controllers\PengajuanBarangController;
+// use App\Http\Controllers\BarangMasukController;
+// use App\Http\Controllers\TransaksiSerahTerimaController;
+// use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\atasan\DashboardController as AtasanDashboard;
 use App\Http\Controllers\karyawan\DashboardController as KaryawanDashboard;
 use App\Http\Controllers\keuangan\DashboardController as KeuanganDashboard;
+use App\Http\Controllers\admin\TransaksiController;
+use App\Http\Controllers\admin\LaporanController;
+use App\Http\Controllers\admin\DataBarangController; 
+
 
 Route::get('/', function() {
     return view('landing');
 })->name('landing');
-
 
 
 
@@ -35,14 +38,8 @@ Route::get('/karyawan/dashboard', [KaryawanDashboard::class, 'index'])->name('ka
 Route::get('/keuangan/dashboard', [KeuanganDashboard::class, 'index'])->name('keuangan.dashboard');
 
 
-// Route::resource('barang', BarangController::class);
 
-// Route::resource('pengajuan', PengajuanBarangController::class);
 
-// Route::resource('barang-masuk', BarangMasukController::class);
-
-// Route::resource('serah-terima', TransaksiSerahTerimaController::class);
-
-// Route::resource('laporan-keuangan', LaporanKeuanganController::class);
-
-//  Route::get('/Admin/index', function () { return view('Admin.index');});
+Route::get('/admin/data-barang', [DataBarangController::class, 'index'])->name('admin.dataBarang');
+Route::get('/admin/data-barang/create', [DataBarangController::class, 'create'])->name('admin.dataBarang.create');
+Route::post('/admin/data-barang', [DataBarangController::class, 'store'])->name('admin.dataBarang.store');               

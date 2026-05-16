@@ -20,7 +20,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <a class="btn btn-primary" href="{{route ('login.login')}}">Sign Up</a>
+                <a class="btn btn-primary" href="{{route ('login')}}">Sign Up</a>
             </div>
         </nav>
         <!-- Masthead-->
