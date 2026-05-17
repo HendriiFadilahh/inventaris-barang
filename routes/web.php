@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\BarangController;
-// use App\Http\Controllers\PengajuanBarangController;
-// use App\Http\Controllers\BarangMasukController;
-// use App\Http\Controllers\TransaksiSerahTerimaController;
-// use App\Http\Controllers\LaporanKeuanganController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PengajuanBarangController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\TransaksiSerahTerimaController;
+use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboard;
@@ -38,8 +38,10 @@ Route::get('/karyawan/dashboard', [KaryawanDashboard::class, 'index'])->name('ka
 Route::get('/keuangan/dashboard', [KeuanganDashboard::class, 'index'])->name('keuangan.dashboard');
 
 
-
-
 Route::get('/admin/data-barang', [DataBarangController::class, 'index'])->name('admin.dataBarang');
-Route::get('/admin/data-barang/create', [DataBarangController::class, 'create'])->name('admin.dataBarang.create');
-Route::post('/admin/data-barang', [DataBarangController::class, 'store'])->name('admin.dataBarang.store');               
+Route::get('/admin/data-barang/create', [DataBarangController::class, 'create'])->name('barang.create');
+Route::post('/admin/data-barang/store', [DataBarangController::class, 'store'])->name('barang.store');               
+Route::get('/admin/data-barang/edit', [DataBarangController::class, 'store'])->name('barang.edit');               
+Route::post('/admin/data-barang/update', [DataBarangController::class, 'store'])->name('barang.update');               
+Route::get('/admin/data-barang/destroy', [DataBarangController::class, 'store'])->name('barang.destroy');    
+Route::resource('barang', DataBarangController::class);           

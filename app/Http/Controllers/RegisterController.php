@@ -32,7 +32,7 @@ class RegisterController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => $validatedData['password'],
-            'role' => 'keuangan' // Set role default sebagai 'keuangan'
+            'role' => 'karyawan' // Set role default sebagai 'karyawan'
         ]);
 
 

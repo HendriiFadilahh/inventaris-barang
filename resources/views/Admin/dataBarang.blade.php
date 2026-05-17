@@ -23,6 +23,7 @@
             <th>Harga</th>
             <th>Aksi</th>
         </tr>
+        
 
         @foreach($barang as $item)
         <tr>

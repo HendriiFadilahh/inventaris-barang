@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class DataBarangController extends Controller
@@ -34,12 +35,16 @@ class DataBarangController extends Controller
             'nama_barang' => 'required',
             'stok' => 'required|integer',
             'harga' => 'required|numeric',
+             'kategori' => 'required',
+            'kode_barang' => 'required|numeric',
         ]);
 
         Barang::create([
             'nama_barang' => $request->nama_barang,
             'stok' => $request->stok,
             'harga' => $request->harga,
+            'kategori' => $request->kategori,
+            'kode_barang' => $request->numeric,
         ]);
 
         return redirect()->route('admin.dataBarang')
@@ -50,35 +55,25 @@ class DataBarangController extends Controller
      * Menampilkan form edit barang
      */
     public function edit($id)
-    {
-        $barang = Barang::findOrFail($id);
+{
+    $barang = Barang::findOrFail($id);
 
-        return view('admin.barangEdit', compact('barang'));
-    }
+    return view('barang.edit', compact('barang'));
+}
 
-    /**
-     * Update data barang
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama_barang' => 'required',
-            'stok' => 'required|integer',
-            'harga' => 'required|numeric',
-        ]);
+public function update(Request $request, $id)
+{
+    $barang = Barang::findOrFail($id);
 
-        $barang = Barang::findOrFail($id);
+    $barang->update([
+        'nama_barang' => $request->nama_barang,
+        'stok' => $request->stok,
+        'harga' => $request->harga,
+    ]);
 
-        $barang->update([
-            'nama_barang' => $request->nama_barang,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-        ]);
-
-        return redirect()->route('admin.dataBarang')
-                         ->with('success', 'Data barang berhasil diupdate');
-    }
-
+    return redirect()->route('barang.index')
+                     ->with('success', 'Data berhasil diupdate');
+}
     /**
      * Hapus data barang
      */
