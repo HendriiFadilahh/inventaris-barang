@@ -41,7 +41,8 @@ Route::get('/keuangan/dashboard', [KeuanganDashboard::class, 'index'])->name('ke
 Route::get('/admin/data-barang', [DataBarangController::class, 'index'])->name('admin.dataBarang');
 Route::get('/admin/data-barang/create', [DataBarangController::class, 'create'])->name('barang.create');
 Route::post('/admin/data-barang/store', [DataBarangController::class, 'store'])->name('barang.store');               
-Route::get('/admin/data-barang/edit', [DataBarangController::class, 'store'])->name('barang.edit');               
-Route::post('/admin/data-barang/update', [DataBarangController::class, 'store'])->name('barang.update');               
-Route::get('/admin/data-barang/destroy', [DataBarangController::class, 'store'])->name('barang.destroy');    
-Route::resource('barang', DataBarangController::class);           
+Route::get('/admin/data-barang/edit/{id}', [DataBarangController::class, 'edit'])->name('barang.edit');               
+Route::post('/admin/data-barang/update/{id}', [DataBarangController::class, 'update'])->name('barang.update');               
+Route::delete('/admin/data-barang/destroy/{id}', [DataBarangController::class, 'destroy'])->name('barang.destroy');    
+Route::resource('barang', DataBarangController::class);   
+Route::get('/laporan-barang', [LaporanController::class, 'index'])->name('admin.laporan');        

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DataBarangController extends Controller
 {
@@ -15,7 +16,7 @@ class DataBarangController extends Controller
     {
         $barang = Barang::all();
 
-        return view('admin.dataBarang', compact('barang'));
+        return view('Admin.dataBarang', compact('barang'));
     }
 
     /**
@@ -23,7 +24,7 @@ class DataBarangController extends Controller
      */
     public function create()
     {
-        return view('admin.barangCreate');
+        return view('Admin.barangCreate');
     }
 
     /**
@@ -31,7 +32,7 @@ class DataBarangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $dataBarang = $request->validate([
             'nama_barang' => 'required',
             'stok' => 'required|integer',
             'harga' => 'required|numeric',
@@ -39,13 +40,7 @@ class DataBarangController extends Controller
             'kode_barang' => 'required|numeric',
         ]);
 
-        Barang::create([
-            'nama_barang' => $request->nama_barang,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-            'kategori' => $request->kategori,
-            'kode_barang' => $request->numeric,
-        ]);
+        Barang::create($dataBarang);
 
         return redirect()->route('admin.dataBarang')
                          ->with('success', 'Data barang berhasil ditambahkan');
@@ -54,12 +49,10 @@ class DataBarangController extends Controller
     /**
      * Menampilkan form edit barang
      */
-    public function edit($id)
-{
-    $barang = Barang::findOrFail($id);
-
-    return view('barang.edit', compact('barang'));
-}
+    public function edit($id){
+    $barang = Barang::findOrfail($id);
+    return view('Admin.barangEdit', compact('barang'));
+    }
 
 public function update(Request $request, $id)
 {
