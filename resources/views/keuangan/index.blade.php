@@ -129,32 +129,11 @@
 
                         <div class="sb-sidenav-menu-heading">Menu</div>
 
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            Transaksi
-                        </a>
-
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-                            Pengeluaran
-                        </a>
-
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('keuangan.laporankeuangan') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
                             </div>
                             Laporan Keuangan
-                        </a>
-
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-file"></i>
-                            </div>
-                            Anggaran
                         </a>
 
                     </div>

@@ -1,108 +1,324 @@
+```blade
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pengajuan Barang</title>
 
-    <title>Riwayat Pengajuan</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #layoutSidenav {
+            display: flex;
+            flex: 1;
+        }
+
+        #layoutSidenav_content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 
-<body>
+<body class="sb-nav-fixed">
 
-    <div class="container mt-5">
+    <!-- Navbar -->
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-        <h2>Riwayat Pengajuan Barang</h2>
+        <a class="navbar-brand ps-3" href="#">
+            INVENTARIS BARANG
+        </a>
 
-        <table class="table table-bordered">
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
 
-            <thead class="table-dark">
+        <!-- Search -->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
 
-                <tr>
+                <input class="form-control" type="text" placeholder="Search for..." />
 
-                    <th>No</th>
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
 
-                    <th>Nama Barang</th>
+            </div>
+        </form>
 
-                    <th>Jumlah</th>
+        <!-- User -->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 
-                    <th>Keterangan</th>
+            <li class="nav-item dropdown">
 
-                    <th>Status</th>
+                <a class="nav-link dropdown-toggle"
+                    id="navbarDropdown"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown">
 
-                    <th>Tanggal</th>
+                    <i class="fas fa-user fa-fw"></i>
 
-                </tr>
+                </a>
 
-            </thead>
+                <ul class="dropdown-menu dropdown-menu-end">
 
-            <tbody>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
 
-                @forelse($pengajuan as $item)
-                    <tr>
+                    <li><a class="dropdown-item" href="#">Activity Log</a></li>
 
-                        <td>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-                            {{ $loop->iteration }}
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
 
-                        </td>
+                </ul>
 
-                        <td>
+            </li>
 
-                            {{ $item->nama_barang }}
+        </ul>
 
-                        </td>
+    </nav>
 
-                        <td>
+    <!-- Layout -->
+    <div id="layoutSidenav">
 
-                            {{ $item->jumlah }}
+        <!-- Sidebar -->
+        <div id="layoutSidenav_nav">
 
-                        </td>
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 
-                        <td>
+                <div class="sb-sidenav-menu">
 
-                            {{ $item->keterangan }}
+                    <div class="nav">
 
-                        </td>
+                        <div class="sb-sidenav-menu-heading">Core</div>
 
-                        <td>
+                        <a class="nav-link" href="#">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            Riwayat Pengajuan
+                        </a>
 
-                            {{ $item->status }}
+                        <div class="sb-sidenav-menu-heading">Menu</div>
 
-                        </td>
+                        <a class="nav-link"
+                            href="{{ route('pengajuan.riwayat') }}">
 
-                        <td>
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
 
-                            {{ $item->created_at->format('d-m-Y') }}
+                            Pengajuan Barang
 
-                        </td>
+                        </a>
 
-                    </tr>
+                        <a class="nav-link active"
+                            href="{{ route('pengajuan.lihat-riwayat') }}">
 
-                @empty
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
 
-                    <tr>
+                            Riwayat Pengajuan
 
-                        <td colspan="6" class="text-center">
+                        </a>
 
-                            Belum ada pengajuan
+                    </div>
 
-                        </td>
+                </div>
 
-                    </tr>
-                @endforelse
+                <div class="sb-sidenav-footer">
 
-            </tbody>
+                    <div class="small">
+                        Logged in as:
+                    </div>
 
-        </table>
+                    Karyawan
+
+                </div>
+
+            </nav>
+
+        </div>
+
+        <!-- Content -->
+        <div id="layoutSidenav_content">
+
+            <main>
+
+                <div class="container-fluid px-4">
+
+                    <h1 class="mt-4">
+                        Riwayat Pengajuan Barang
+                    </h1>
+
+                    <ol class="breadcrumb mb-4">
+
+                        <li class="breadcrumb-item active">
+                            Riwayat Pengajuan
+                        </li>
+
+                    </ol>
+
+                    <div class="card shadow">
+
+                        <div class="card-header bg-primary text-white">
+
+                            <h4 class="mb-0">
+                                Data Riwayat Pengajuan
+                            </h4>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <table class="table table-bordered table-striped">
+
+                                <thead class="table-dark">
+
+                                    <tr>
+
+                                        <th>No</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Keterangan</th>
+                                        <th>Status</th>
+                                        <th>Tanggal</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @forelse($pengajuan as $item)
+
+                                        <tr>
+
+                                            <td>{{ $loop->iteration }}</td>
+
+                                            <td>{{ $item->nama_barang }}</td>
+
+                                            <td>{{ $item->jumlah }}</td>
+
+                                            <td>{{ $item->keterangan }}</td>
+
+                                            <td>
+
+                                                @if($item->status == 'Disetujui')
+                                                    <span class="badge bg-success">
+                                                        Disetujui
+                                                    </span>
+
+                                                @elseif($item->status == 'Ditolak')
+                                                    <span class="badge bg-danger">
+                                                        Ditolak
+                                                    </span>
+
+                                                @else
+                                                    <span class="badge bg-warning text-dark">
+                                                        Pending
+                                                    </span>
+                                                @endif
+
+                                            </td>
+
+                                            <td>
+                                                {{ $item->created_at->format('d-m-Y') }}
+                                            </td>
+
+                                        </tr>
+
+                                    @empty
+
+                                        <tr>
+
+                                            <td colspan="7"
+                                                class="text-center">
+
+                                                Belum ada pengajuan
+
+                                            </td>
+
+                                        </tr>
+
+                                    @endforelse
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="py-4 bg-light mt-auto">
+
+                <div class="container-fluid px-4">
+
+                    <div class="d-flex align-items-center justify-content-between small">
+
+                        <div class="text-muted">
+                            Copyright &copy; INVENTARIS BARANG 2026
+                        </div>
+
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </footer>
+
+        </div>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 </html>
+```

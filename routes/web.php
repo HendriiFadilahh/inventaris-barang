@@ -10,6 +10,7 @@ use App\Http\Controllers\atasan\LaporanController as AtasanLaporan;
 use App\Http\Controllers\karyawan\DashboardController as KaryawanDashboard;
 use App\Http\Controllers\karyawan\PengajuanController;
 use App\Http\Controllers\keuangan\DashboardController as KeuanganDashboard;
+use App\Http\Controllers\keuangan\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,22 @@ Route::get('/riwayat-pengajuan', [PengajuanController::class, 'riwayat'])->name(
 Route::get('/pengajuann',[PengajuannController::class, 'createe'])->name('pengajuann.createe');
 Route::post('/pengajuann',[PengajuannController::class, 'storee'])->name('pengajuann.storee');
 Route::get('/riwayat-pengajuann/lihat-riwayatt',[PengajuannController::class, 'lihatRiwayatt'])->name('pengajuann.lihat-riwayatt');
-Route::get('/riwayat-pengajuann', [RiwayatController::class, 'index'])->name('pengajuann.riwayat');
+Route::get('/atasan/riwayat-pengajuann', [RiwayatController::class, 'index'])->name('pengajuann.riwayat');
 Route::get('/atasan/laporan-barang', [AtasanLaporan::class, 'index'])->name('atasan.laporan');
 
 
+Route::put('/laporan/{id}/setuju',
+[AdminLaporan::class,'setuju'])
+->name('laporan.setuju');
+
+Route::put('/laporan/{id}/tolak',
+[AdminLaporan::class,'tolak'])
+->name('laporan.tolak');
+
+Route::delete(
+    '/riwayat/{id}',
+    [RiwayatController::class,'hapus']
+)->name('riwayat.hapus');
+
+
+Route::get('/keuangan/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('keuangan.laporankeuangan');

@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!-- Font Awesome -->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
         html,
@@ -50,7 +49,7 @@
         .card-custom {
             border: none;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .table th {
@@ -72,8 +71,7 @@
             INVENTARIS BARANG
         </a>
 
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-            id="sidebarToggle">
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
 
             <i class="fas fa-bars"></i>
 
@@ -84,9 +82,7 @@
 
             <div class="input-group">
 
-                <input class="form-control"
-                    type="text"
-                    placeholder="Search for..." />
+                <input class="form-control" type="text" placeholder="Search for..." />
 
                 <button class="btn btn-primary" type="button">
                     <i class="fas fa-search"></i>
@@ -101,10 +97,7 @@
 
             <li class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle"
-                    id="navbarDropdown"
-                    href="#"
-                    role="button"
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                     data-bs-toggle="dropdown">
 
                     <i class="fas fa-user fa-fw"></i>
@@ -157,8 +150,7 @@
         <!-- Sidebar -->
         <div id="layoutSidenav_nav">
 
-            <nav class="sb-sidenav accordion sb-sidenav-dark"
-                id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 
                 <div class="sb-sidenav-menu">
 
@@ -182,8 +174,7 @@
                             Menu
                         </div>
 
-                        <a class="nav-link"
-                            href="{{ route('admin.dataBarang') }}">
+                        <a class="nav-link" href="{{ route('admin.dataBarang') }}">
 
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-box"></i>
@@ -265,49 +256,80 @@
                                         <th>No</th>
                                         <th>Tanggal</th>
                                         <th>Nama Barang</th>
-                                        <th>Jenis</th>
                                         <th>Jumlah</th>
                                         <th>Status</th>
+                                        <th>Aksi</th>
                                     </tr>
 
                                 </thead>
 
                                 <tbody>
 
-                                    @foreach($laporan as $item)
+                                    @foreach ($laporan as $item)
+                                        <tr>
 
-                                    <tr>
+                                            <td>{{ $loop->iteration }}</td>
 
-                                        <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->tanggal }}</td>
 
-                                        <td>{{ $item->tanggal }}</td>
+                                            <td>{{ $item->nama_barang }}</td>
 
-                                        <td>{{ $item->nama_barang }}</td>
+                                            <td>{{ $item->jumlah }}</td>
 
-                                        <td>{{ $item->jenis }}</td>
+                                            <td>
 
-                                        <td>{{ $item->jumlah }}</td>
+                                                @if ($item->status == 'Disetujui')
+                                                    <span class="badge bg-success">
+                                                        {{ $item->status }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge bg-danger">
+                                                        {{ $item->status }}
+                                                    </span>
+                                                @endif
 
-                                        <td>
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->status == 'Pending')
+                                                    <div class="d-flex gap-2">
 
-                                            @if($item->status == 'Selesai')
+                                                        <!-- Tombol Setuju -->
+                                                        <form action="{{ route('laporan.setuju', $item->id) }}"
+                                                            method="POST">
 
-                                                <span class="badge bg-success">
-                                                    {{ $item->status }}
-                                                </span>
+                                                            @csrf
+                                                            @method('PUT')
 
-                                            @else
+                                                            <button class="btn btn-success btn-sm">
 
-                                                <span class="badge bg-danger">
-                                                    {{ $item->status }}
-                                                </span>
+                                                                <i class="fas fa-check"></i>
 
-                                            @endif
+                                                            </button>
 
-                                        </td>
+                                                        </form>
 
-                                    </tr>
+                                                        <!-- Tombol Tolak -->
+                                                        <form action="{{ route('laporan.tolak', $item->id) }}"
+                                                            method="POST">
 
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <button class="btn btn-danger btn-sm">
+
+                                                                <i class="fas fa-times"></i>
+
+                                                            </button>
+
+                                                        </form>
+
+                                                    </div>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+
+                                        </tr>
                                     @endforeach
 
                                 </tbody>

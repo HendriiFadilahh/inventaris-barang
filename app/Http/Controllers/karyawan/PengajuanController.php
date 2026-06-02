@@ -4,6 +4,7 @@ namespace App\Http\Controllers\karyawan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pengajuan;
+use App\Models\LaporanBarang;
 use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
@@ -18,24 +19,26 @@ class PengajuanController extends Controller
         $request->validate([
 
             'nama_barang' => 'required',
-
             'jumlah' => 'required|numeric',
-
             'keterangan' => 'nullable',
 
         ]);
 
         Pengajuan::create([
-
             'nama_barang' => $request->nama_barang,
-
             'jumlah' => $request->jumlah,
-
             'keterangan' => $request->keterangan,
-
             'status' => 'Pending',
-
         ]);
+
+        LaporanBarang::create([
+            'tanggal' => now()->toDateString(),
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'status' => 'Pending',
+        ]);
+
+
 
         return redirect()
             ->route('pengajuan.riwayat')

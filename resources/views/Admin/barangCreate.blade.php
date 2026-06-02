@@ -1,55 +1,254 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Barang</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <style>
+        html, body{
+            height:100%;
+        }
+
+        body{
+            display:flex;
+            flex-direction:column;
+        }
+
+        #layoutSidenav{
+            display:flex;
+            flex:1;
+        }
+
+        #layoutSidenav_content{
+            display:flex;
+            flex-direction:column;
+            flex:1;
+        }
+
+        main{
+            flex:1;
+        }
+    </style>
 </head>
-<body>
 
-<div class="container mt-5">
+<body class="sb-nav-fixed">
 
-    <h2>Tambah Barang</h2>
+<!-- Navbar -->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-    <form action="{{ route('barang.store') }}" method="POST">
-        @csrf
+    <a class="navbar-brand ps-3" href="#">
+        INVENTARIS BARANG
+    </a>
 
-        <div class="mb-3">
-            <label>Nama Barang</label>
-            <input type="text" name="nama_barang" class="form-control">
-        </div>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+            id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
-        <div class="mb-3">
-            <label>Stok</label>
-            <input type="number" name="stok" class="form-control">
-        </div>
+    <ul class="navbar-nav ms-auto me-3">
+        <li class="nav-item dropdown">
 
- <div class="mb-3">
-            <label>Harga</label>
-            <input type="number" name="harga" class="form-control">
-        </div>
+            <a class="nav-link dropdown-toggle"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown">
+                <i class="fas fa-user fa-fw"></i>
+            </a>
 
-        <div class="mb-3">
-            <label>kategori</label>
-            <input type="text" name="kategori" class="form-control">
-        </div>
+            <ul class="dropdown-menu dropdown-menu-end">
 
-        <div class="mb-3">
-            <label>Kode Barang</label>
-            <input type="number" name="kode_barang" class="form-control">
-        </div>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">
+                            Logout
+                        </button>
+                    </form>
+                </li>
 
-        <button type="submit" class="btn btn-primary">
-            Simpan
-        </button>
+            </ul>
 
-        <a href="/admin/data-barang" class="btn btn-secondary">
-            Kembali
-        </a>
+        </li>
+    </ul>
 
-    </form>
+</nav>
+
+<div id="layoutSidenav">
+
+    <!-- Sidebar -->
+    <div id="layoutSidenav_nav">
+
+        <nav class="sb-sidenav accordion sb-sidenav-dark">
+
+            <div class="sb-sidenav-menu">
+
+                <div class="nav">
+
+                    <div class="sb-sidenav-menu-heading">
+                        Core
+                    </div>
+
+                    <a class="nav-link"
+                       href="{{ route('admin.dashboard') }}">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        Dashboard
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">
+                        Menu
+                    </div>
+
+                    <a class="nav-link active"
+                       href="{{ route('barang.index') }}">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        Data Barang
+                    </a>
+
+                    <a class="nav-link"
+                       href="{{ route('admin.laporan') }}">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        Laporan Barang
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="sb-sidenav-footer">
+                <div class="small">
+                    Logged in as:
+                </div>
+                Admin
+            </div>
+
+        </nav>
+
+    </div>
+
+    <!-- Content -->
+    <div id="layoutSidenav_content">
+
+        <main>
+
+            <div class="container-fluid px-4 mt-4">
+
+                <h2 class="mb-4">Tambah Barang</h2>
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <form action="{{ route('barang.store') }}" method="POST">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Nama Barang
+                                </label>
+
+                                <input type="text"
+                                       name="nama_barang"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Stok
+                                </label>
+
+                                <input type="number"
+                                       name="stok"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Harga
+                                </label>
+
+                                <input type="number"
+                                       name="harga"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Kategori
+                                </label>
+
+                                <input type="text"
+                                       name="kategori"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Kode Barang
+                                </label>
+
+                                <input type="text"
+                                       name="kode_barang"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                Simpan
+                            </button>
+
+                            <a href="{{ route('barang.index') }}"
+                               class="btn btn-secondary">
+                                Kembali
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="py-4 bg-light mt-auto">
+
+            <div class="container-fluid px-4">
+
+                <div class="d-flex align-items-center justify-content-between small">
+
+                    <div class="text-muted">
+                        Copyright &copy; INVENTARIS BARANG 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
