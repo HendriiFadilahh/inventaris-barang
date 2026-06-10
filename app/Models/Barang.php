@@ -14,4 +14,3 @@ class Barang extends Model
 
     
 }
-

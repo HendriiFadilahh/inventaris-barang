@@ -4,6 +4,7 @@ namespace App\Http\Controllers\karyawan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
 
 class DashboardController extends Controller
 {
@@ -11,4 +12,9 @@ class DashboardController extends Controller
     {
         return view('karyawan.index');
     }
+}
+
+{
+    $barang = Barang::all();
+    return view('karyawan.katalog', compact('barang'));
 }

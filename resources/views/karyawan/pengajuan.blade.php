@@ -118,29 +118,35 @@
 
                         <div class="sb-sidenav-menu-heading">Core</div>
 
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-tachometer-alt"></i>
-                            </div>
-                            Pengajuan Barang
-                        </a>
+                       <a class="nav-link" href="{{ route('karyawan.dashboard') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-tachometer-alt"></i>
+    </div>
+    Dashboard
+</a>
 
                         <div class="sb-sidenav-menu-heading">Menu</div>
 
 
-                        <a class="nav-link" href="{{ route('pengajuan.riwayat') }}">
+                        <a class="nav-link" href="{{ route('pengajuan.create') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-down"></i>
                             </div>
                             Pengajuan Barang
                         </a>
 
-                        <a class="nav-link" href="{{ route('pengajuan.lihat-riwayat') }}">
+                        <a class="nav-link" href="{{ route('pengajuan.riwayat') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
                             </div>
                             Riwayat Pengajuan
                         </a>
+                        <a class="nav-link" href="{{ route('karyawan.katalog') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-box"></i>
+    </div>
+    Katalog Barang
+</a>
 
                     </div>
 
@@ -200,57 +206,68 @@
 
                                 @endif
 
-                                <form action="{{ route('pengajuan.store') }}" method="POST">
+                               <form action="{{ route('pengajuan.store') }}" method="POST">
+    @csrf
 
-                                    @csrf
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-                                    <!-- Nama Barang -->
-                                    <div class="mb-3">
+    <!-- Nama Barang -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">
+            Nama Barang
+        </label>
 
-                                        <label class="form-label">
-                                            Nama Barang
-                                        </label>
+        <select name="nama_barang" class="form-select" required>
+            <option value="">-- Pilih Barang --</option>
 
-                                        <input type="text" name="nama_barang" class="form-control"
-                                            placeholder="Masukkan nama barang" required>
+            @foreach($barang as $item)
+                <option value="{{ $item->nama_barang }}">
+                    {{ $item->nama_barang }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                                    </div>
+    <!-- Jumlah -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">
+            Jumlah Barang
+        </label>
 
-                                    <!-- Jumlah -->
-                                    <div class="mb-3">
+        <input
+            type="number"
+            name="jumlah"
+            class="form-control"
+            value="{{ old('jumlah') }}"
+            min="1"
+            required>
+    </div>
 
-                                        <label class="form-label">
-                                            Jumlah
-                                        </label>
+    <!-- Keterangan -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">
+            Keterangan
+        </label>
 
-                                        <input type="number" name="jumlah" class="form-control"
-                                            placeholder="Masukkan jumlah barang" required>
+        <textarea
+            name="keterangan"
+            rows="4"
+            class="form-control"
+            placeholder="Contoh: Untuk kebutuhan laboratorium komputer">{{ old('keterangan') }}</textarea>
+    </div>
 
-                                    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-paper-plane me-2"></i>
+            Ajukan Barang
+        </button>
+    </div>
 
-                                    <!-- Keterangan -->
-                                    <div class="mb-3">
-
-                                        <label class="form-label">
-                                            Keterangan
-                                        </label>
-
-                                        <textarea name="keterangan" rows="4" class="form-control" placeholder="Masukkan keterangan">
-                    </textarea>
-
-                                    </div>
-
-                                    <!-- Button -->
-                                    <button type="submit" class="btn btn-primary">
-
-                                        Ajukan Barang
-
-                                    </button>
-
-                                
-
-                                </form>
-
+</form>
                             </div>
 
                         </div>

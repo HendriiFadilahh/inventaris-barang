@@ -142,6 +142,24 @@
                             </div>
                             Laporan Barang
                         </a>
+                        <a class="nav-link" href="{{ route('admin.satuan') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-balance-scale"></i>
+    </div>
+    Satuan Barang
+</a>
+                        <a class="nav-link" href="{{ route('admin.supplier') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-truck"></i>
+    </div>
+    Supplier
+</a>
+                        <a class="nav-link" href="{{ route('admin.kategori') }}">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            Kategori Barang
+                        </a>
 
                     </div>
 
@@ -159,125 +177,39 @@
         <!-- Content -->
         <div id="layoutSidenav_content">
 
-            <main>
+            <main class="container-fluid px-4 mt-4">
 
-                <div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard Inventaris Barang</h1>
 
-                    <h1 class="mt-4">Dashboard</h1>
+    <div class="row">
 
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">
-                            Dashboard
-                        </li>
-                    </ol>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    Total Barang
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <h4>{{ $totalBarang ?? 0 }}</h4>
+                </div>
+            </div>
+        </div>
 
-                    <div class="row">
-
-                        <!-- Card 1 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-primary text-white mb-4">
-
-                                <div class="card-body">
-                                    TOTAL BARANG
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-warning text-white mb-4">
-
-                                <div class="card-body">
-                                    BARANG MASUK
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-success text-white mb-4">
-
-                                <div class="card-body">
-                                    BARANG KELUAR
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-danger text-white mb-4">
-
-                                <div class="card-body">
-                                    STOK MENIPIS
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+        <div class="col-xl-9">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Grafik Stok Barang
                 </div>
 
-            </main>
+                <div class="card-body">
+                    <canvas id="barangChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
 
             <!-- Footer -->
             <footer class="py-4 bg-light mt-auto">
@@ -308,6 +240,41 @@
 
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('barangChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: @json($labels ?? []),
+        datasets: [{
+            label: 'Stok Barang',
+            data: @json($stok ?? []),
+            borderWidth: 1,
+            backgroundColor: [
+                '#0d6efd',
+                '#198754',
+                '#ffc107',
+                '#dc3545',
+                '#6f42c1',
+                '#20c997',
+                '#fd7e14'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
 
 </body>
 </html>

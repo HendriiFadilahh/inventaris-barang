@@ -1,202 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Login Inventaris Barang</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
-    <!-- CSS LANGSUNG DI SINI -->
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lottie Animation -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
     <style>
-
-        body{
-            background-color: #0d6efd;
-            font-family: Arial, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .card{
-            border-radius: 15px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* futuristic gradient */
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: bgMove 10s ease infinite;
         }
 
-        .card-header{
-            background-color: white;
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .card-header h3{
-            font-weight: bold;
-        }
-
-        .btn-primary{
+        /* floating particles */
+        body::before {
+            content: "";
+            position: absolute;
             width: 100%;
-            border-radius: 10px;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveDots 6s linear infinite;
+            opacity: 0.4;
         }
 
-        .form-control{
-            border-radius: 10px;
+        @keyframes moveDots {
+            from { transform: translateY(0); }
+            to { transform: translateY(-40px); }
         }
 
-        .card-footer{
-            background-color: white;
+        /* CARD */
+        .login-card {
+            width: 450px;
+            padding: 30px;
+            border-radius: 22px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
         }
 
-        a{
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .btn-login {
+            width: 100%;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            background: linear-gradient(90deg, #0ea5e9, #22c55e);
+            border: none;
+        }
+
+        .btn-login:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(14,165,233,0.6);
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        .text-small {
+            font-size: 13px;
+        }
+
+        a {
+            color: #fff;
             text-decoration: none;
         }
 
-        a:hover{
+        a:hover {
             text-decoration: underline;
         }
 
-    </style>
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 20px;
+            z-index: 3;
+        }
 
+        /* ROBOT */
+        .robot {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 15px rgba(0,255,255,0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div id="layoutAuthentication">
+<!-- BACK -->
+<a href="{{ route('landing') }}" class="back-btn">
+    <i class="fas fa-arrow-left"></i>
+</a>
 
-        <div id="layoutAuthentication_content">
+<!-- LOGIN CARD -->
+<div class="login-card">
 
-            <main>
-
-                <div class="container">
-
-                    <div class="row justify-content-center">
-
-                        <div class="col-lg-5">
-<div class="close-btn" 
- style="
-    position:absolute;
-    top:10px;
-    left:10px;
-    width:30px;
-    height:30px;
-    border:none;
-    border-radius:50%;
-    background:black;
-    color:white;
-    cursor:pointer;"
-    
-> <a href="{{route('landing')}}"><-</a>
-</div>
-                            <div class="card shadow-lg border-0 mt-5">
-
-                                <div class="card-header">
-                                    <h3 class="text-center my-4">
-                                        Login Inventaris Barang
-                                    </h3>
-                                </div>
-
-                                <div class="card-body">
-
-                                    <form action="{{ route('authenticate') }}" method="POST">
-
-                                        <!-- EMAIL -->
-                                        <div class="form-floating mb-3">
-                                            <input 
-                                                class="form-control"
-                                                id="inputEmail"
-                                                type="email"
-                                                name="email"
-                                                placeholder="name@example.com"
-                                                required
-                                            />
-
-                                            <label for="inputEmail">
-                                                Email Address
-                                            </label>
-                                        </div>
-
-                                        <!-- PASSWORD -->
-                                        <div class="form-floating mb-3">
-
-                                            <input 
-                                                class="form-control"
-                                                id="inputPassword"
-                                                type="password"
-                                                name="password"
-                                                placeholder="Password"
-                                                required
-                                            />
-
-                                            <label for="inputPassword">
-                                                Password
-                                            </label>
-
-                                        </div>
-
-                                        <!-- CHECKBOX -->
-                                        <div class="form-check mb-3">
-
-                                            <input 
-                                                class="form-check-input"
-                                                id="rememberPasswordCheck"
-                                                type="checkbox"
-                                            />
-
-                                            <label 
-                                                class="form-check-label"
-                                                for="rememberPasswordCheck"
-                                            >
-                                                Remember Password
-                                            </label>
-
-                                        </div>
-
-                                        <!-- BUTTON -->
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-
-                                            <a class="small" href="#">
-                                                Forgot Password?
-                                            </a>
-
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <button type="submit" class="btn btn-primary">
-                                                Login
-                                            </button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-
-                                <div class="card-footer text-center py-3">
-
-                                    <div class="small">
-
-                                        <a href="{{route('register')}}">
-                                            Need an account? Sign up!
-                                        </a>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </main>
-
-        </div>
-
+    <!-- ROBOT ANIMATION -->
+    <div class="robot">
+        <lottie-player
+            src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json"
+            background="transparent"
+            speed="1"
+            style="width: 140px; height: 140px;"
+            loop
+            autoplay>
+        </lottie-player>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <h3 class="title">Login Inventaris Barang</h3>
+    <div class="subtitle">AI Robot siap membantu manajemen barang 🚀</div>
+
+    <form action="{{ route('authenticate') }}" method="POST">
+        @csrf
+
+        <!-- EMAIL -->
+        <div class="mb-3">
+            <label class="text-white">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-3">
+            <label class="text-white">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+        </div>
+
+        <!-- REMEMBER -->
+        <div class="form-check mb-3 text-white text-small">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Remember me</label>
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" class="btn btn-login">
+            Login
+        </button>
+
+        <div class="text-center mt-3 text-small">
+            <a href="#">Lupa password?</a>
+        </div>
+
+        <div class="text-center mt-2 text-small">
+            <a href="{{ route('register') }}">Belum punya akun? Register</a>
+        </div>
+
+    </form>
+
+</div>
 
 </body>
 </html>

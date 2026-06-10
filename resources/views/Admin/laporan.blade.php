@@ -193,6 +193,24 @@
                             Laporan Barang
 
                         </a>
+                        <a class="nav-link" href="{{ route('admin.satuan') }}">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            Satuan Barang
+                        </a>
+                                                <a class="nav-link" href="{{ route('admin.supplier') }}">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            Supplier
+                        </a>
+                        <a class="nav-link" href="{{ route('admin.kategori') }}">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            Kategori Barang
+                        </a>
 
                     </div>
 
@@ -256,6 +274,7 @@
                                         <th>No</th>
                                         <th>Tanggal</th>
                                         <th>Nama Barang</th>
+                                        <th>Jenis</th>
                                         <th>Jumlah</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -273,6 +292,8 @@
                                             <td>{{ $item->tanggal }}</td>
 
                                             <td>{{ $item->nama_barang }}</td>
+
+                                            <td>{{ $item->jenis }}</td>
 
                                             <td>{{ $item->jumlah }}</td>
 

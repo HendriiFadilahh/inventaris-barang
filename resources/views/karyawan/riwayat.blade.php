@@ -126,28 +126,23 @@
 
                         <div class="sb-sidenav-menu-heading">Core</div>
 
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-tachometer-alt"></i>
-                            </div>
-                            Riwayat Pengajuan
-                        </a>
-
+                       <a class="nav-link" href="{{ route('karyawan.dashboard') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-tachometer-alt"></i>
+    </div>
+    Dashboard
+</a>
                         <div class="sb-sidenav-menu-heading">Menu</div>
 
-                        <a class="nav-link"
-                            href="{{ route('pengajuan.riwayat') }}">
-
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-
-                            Pengajuan Barang
-
-                        </a>
+                        <a class="nav-link" href="{{ route('pengajuan.create') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-arrow-down"></i>
+    </div>
+    Pengajuan Barang
+</a>
 
                         <a class="nav-link active"
-                            href="{{ route('pengajuan.lihat-riwayat') }}">
+                            href="{{ route('pengajuan.riwayat') }}">
 
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
@@ -156,6 +151,12 @@
                             Riwayat Pengajuan
 
                         </a>
+                        <a class="nav-link" href="{{ route('karyawan.katalog') }}">
+    <div class="sb-nav-link-icon">
+        <i class="fas fa-box"></i>
+    </div>
+    Katalog Barang
+</a>
 
                     </div>
 
@@ -208,7 +209,7 @@
 
                             <table class="table table-bordered table-striped">
 
-                                <thead class="table-dark">
+                                <thead class="table-black">
 
                                     <tr>
 

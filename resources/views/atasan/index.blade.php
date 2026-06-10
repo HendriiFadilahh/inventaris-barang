@@ -136,14 +136,16 @@
                             </div>
                             Laporan Barang
                         </a>
+                        
 
                         <a class="nav-link" href="{{ route('pengajuann.riwayat') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-arrow-up"></i>
                             </div>
                             Riwayat Pengajuan
-                        </a>
+                        </a> 
 
+                        
                     </div>
 
                 </div>
@@ -160,125 +162,17 @@
         <!-- Content -->
         <div id="layoutSidenav_content">
 
-            <main>
+           <main class="p-0 m-0">
+        <img src="{{ asset('image/dhiyax.webp') }}" 
+             alt="Dashboard Image"
+             style="
+                width: 100%;
+                height: 100vh;
+                object-fit: cover;
+                display: block;
+             ">
+    </main>
 
-                <div class="container-fluid px-4">
-
-                    <h1 class="mt-4">Dashboard</h1>
-
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">
-                            Dashboard
-                        </li>
-                    </ol>
-
-                    <div class="row">
-
-                        <!-- Card 1 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-primary text-white mb-4">
-
-                                <div class="card-body">
-                                    TOTAL BARANG
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-warning text-white mb-4">
-
-                                <div class="card-body">
-                                    BARANG MASUK
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-success text-white mb-4">
-
-                                <div class="card-body">
-                                    BARANG KELUAR
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <div class="card bg-danger text-white mb-4">
-
-                                <div class="card-body">
-                                    STOK MENIPIS
-                                </div>
-
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-
-                                    <a class="small text-white stretched-link" href="#">
-                                        View Details
-                                    </a>
-
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </main>
 
             <!-- Footer -->
             <footer class="py-4 bg-light mt-auto">

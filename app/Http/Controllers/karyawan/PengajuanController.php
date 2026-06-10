@@ -3,69 +3,72 @@
 namespace App\Http\Controllers\karyawan;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pengajuan;
-use App\Models\LaporanBarang;
 use Illuminate\Http\Request;
+use App\Models\PengajuanBarang;
+use App\Models\Barang;
 
 class PengajuanController extends Controller
 {
-    public function create()
+    // Form Pengajuan Barang
+    public function index()
     {
-        return view('pengajuan.create');
+        $barang = Barang::all();
+        return view('karyawan.pengajuan', compact('barang'));
     }
 
+    public function create()
+    {
+        $barang = Barang::all();
+        return view('karyawan.pengajuan', compact('barang'));
+    }
+
+    // Simpan Pengajuan
     public function store(Request $request)
     {
         $request->validate([
-
             'nama_barang' => 'required',
-            'jumlah' => 'required|numeric',
-            'keterangan' => 'nullable',
-
+            'jumlah' => 'required|integer|min:1',
+            'keterangan' => 'nullable'
         ]);
 
-        Pengajuan::create([
+        PengajuanBarang::create([
             'nama_barang' => $request->nama_barang,
             'jumlah' => $request->jumlah,
             'keterangan' => $request->keterangan,
-            'status' => 'Pending',
+            'status' => 'Pending' // lebih cocok untuk approval
         ]);
-
-        LaporanBarang::create([
-            'tanggal' => now()->toDateString(),
-            'nama_barang' => $request->nama_barang,
-            'jumlah' => $request->jumlah,
-            'status' => 'Pending',
-        ]);
-
-
 
         return redirect()
             ->route('pengajuan.riwayat')
-            ->with(
-                'success',
-                'Pengajuan berhasil dibuat'
-            );
+            ->with('success', 'Pengajuan barang berhasil dikirim.');
     }
 
-    public function riwayat()
-    {
-        $pengajuan =
-        Pengajuan::latest()->get();
-
-        return view(
-            'karyawan.pengajuan',
-            compact('pengajuan')
-        );
-    }
-
+    // Riwayat Pengajuan
     public function lihatRiwayat()
     {
-        $pengajuan =
-           Pengajuan::latest()->get();
+        $pengajuan = PengajuanBarang::latest()->get();
+        return view('karyawan.riwayat', compact('pengajuan'));
+    }
 
-        return view(
-            'karyawan.riwayat', compact('pengajuan')
-        );
+    // =========================
+    // APPROVAL ATASAN
+    // =========================
+
+    public function approve($id)
+    {
+        $pengajuan = PengajuanBarang::findOrFail($id);
+        $pengajuan->status = 'Disetujui';
+        $pengajuan->save();
+
+        return back()->with('success', 'Pengajuan disetujui');
+    }
+
+    public function reject($id)
+    {
+        $pengajuan = PengajuanBarang::findOrFail($id);
+        $pengajuan->status = 'Ditolak';
+        $pengajuan->save();
+
+        return back()->with('success', 'Pengajuan ditolak');
     }
 }
